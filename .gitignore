@@ -1,0 +1,43 @@
+# System files
+.DS_Store
+
+# IDE and Editor folders
+*.iml
+.idea/
+*.vscode/
+*.eclipse
+
+# Compiled class files
+*.class
+
+# Build directory
+out/
+target/
+build/
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Logging files
+*.log
+
+# Others
+*.swp
+*~
