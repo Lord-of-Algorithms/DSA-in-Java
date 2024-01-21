@@ -18,9 +18,9 @@ git clone git@github.com:Lord-of-Algorithms/DSA-in-Java.git
 To run an example, navigate to the corresponding file and execute it using your Java environment:
 
 ```
-cd DSA-in-Java/src
-javac binarytree/BinarySearchTreeMain.java
-java binarytree/BinarySearchTreeMain.java
+cd DSA-in-Java/src/binarytree
+javac BinarySearchTreeMain.java
+java BinarySearchTreeMain.java
 ```
 
 ## License
