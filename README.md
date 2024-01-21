@@ -10,7 +10,7 @@ While this project is open-source, it is not currently seeking contributions. Yo
 To clone and run these examples locally, follow these steps:
 
 ```
-git clone git@github.com:Lord-of-Algorithms/DSA-in-Java.git
+git clone https://github.com/Lord-of-Algorithms/DSA-in-Java.git
 ```
 
 ## Usage
