@@ -1,6 +1,6 @@
-package binarytree.bst;
+package binarytree;
 
-import binarytree.BinaryTreePrinter;
+import binarytree.bst.ITree;
 import binarytree.bst.avl.AvlTree;
 import binarytree.bst.red_black.RedBlackTree;
 import binarytree.bst.standard.BinarySearchTreeIterative;
