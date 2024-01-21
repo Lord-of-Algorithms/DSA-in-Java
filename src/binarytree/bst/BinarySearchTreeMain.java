@@ -12,7 +12,8 @@ public class BinarySearchTreeMain {
      * Main method to demonstrate the operations of a binary search tree.
      */
     public static void main(String[] args) {
-        // Create a binary search tree with the specified operational nature (StandardIterative or StandardRecursive).
+        // Create a binary search tree with the specified type:
+        // BST (StandardIterative or StandardRecursive), AVL and Red-Black.
         ITree tree = createTree(BstType.RedBlack);
 
         // Inserting various keys into the tree.
