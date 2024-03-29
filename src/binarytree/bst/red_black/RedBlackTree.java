@@ -242,10 +242,10 @@ public class RedBlackTree implements ITree {
 
             if (nodeToDelete.left == NIL) {
                 replacerNode = nodeToDelete.right;
-                ReplaceSubTree(nodeToDelete, replacerNode);
+                replaceSubTree(nodeToDelete, replacerNode);
             } else if (nodeToDelete.right == NIL) {
                 replacerNode = nodeToDelete.left;
-                ReplaceSubTree(nodeToDelete, replacerNode);
+                replaceSubTree(nodeToDelete, replacerNode);
             }
 
             if (isDeletingNodeBlack) {
@@ -267,7 +267,7 @@ public class RedBlackTree implements ITree {
             if (successor.parent != nodeToDelete) // Successor is not a direct child of the deleting node
             {
                 // Replace the successor with its child
-                ReplaceSubTree(successor, successor.right);
+                replaceSubTree(successor, successor.right);
                 successor.right = nodeToDelete.right;
             }
             // When successor.right is NIL, this line is ensuring
@@ -275,7 +275,7 @@ public class RedBlackTree implements ITree {
             successor.right.parent = successor;
 
             // Replace the node to be deleted with successor
-            ReplaceSubTree(nodeToDelete, successor);
+            replaceSubTree(nodeToDelete, successor);
             successor.left = nodeToDelete.left;
             successor.left.parent = successor;
 
@@ -294,7 +294,7 @@ public class RedBlackTree implements ITree {
      * @param targetNode   The root of the subtree that will be replaced.
      * @param replacerNode The root of the subtree that replaces the target subtree.
      */
-    private void ReplaceSubTree(RbNode targetNode, RbNode replacerNode) {
+    private void replaceSubTree(RbNode targetNode, RbNode replacerNode) {
         if (targetNode.parent == NIL) {
             root = replacerNode;
         } else if (targetNode == targetNode.parent.left) {
