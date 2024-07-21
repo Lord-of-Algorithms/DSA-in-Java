@@ -1,34 +1,44 @@
-package graph.traversal.main;
+package graph.traversal.graph;
 
-import graph.traversal.UnweightedGraph;
-import graph.traversal.Vertex;
+import graph.Vertex;
+import graph.VertexUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Represents an undirected and unweighted graph using an adjacency matrix for storing edges.
  */
-class UndirectedUnweightedMatrixGraph implements UnweightedGraph {
+public class ExplorableMatrixGraph implements ExplorableGraph {
 
     // Maps each vertex to its corresponding index in the adjacency matrix.
     private final Map<Vertex, Integer> indicesMap;
     // Represents the edges between vertices.
     private final int[][] adjacencyMatrix;
+    private final int maxVertices;
+    private int currentVertexCount;
 
-    UndirectedUnweightedMatrixGraph(GraphVertex[] vertices) {
-        if (vertices == null || vertices.length == 0) {
-            throw new IllegalArgumentException("Vertex array cannot be null or empty.");
-        }
+    /**
+     * Constructs a graph with a specified maximum number of vertices.
+     */
+    public ExplorableMatrixGraph(int maxVertexCount) {
         indicesMap = new HashMap<>();
-        int count = vertices.length;
-        for (int i = 0; i < count; i++) {
-            if (vertices[i] == null) {
-                throw new IllegalArgumentException("Vertex at index " + i + " is null.");
-            }
-            indicesMap.put(vertices[i], i);
+        adjacencyMatrix = new int[maxVertexCount][maxVertexCount];
+        maxVertices = maxVertexCount;
+        currentVertexCount = 0;
+    }
+
+    @Override
+    public void addVertex(Vertex vertex) {
+        if (vertex == null) {
+            throw new IllegalArgumentException("Vertex cannot be null.");
         }
-        adjacencyMatrix = new int[count][count];
+        if (currentVertexCount >= maxVertices) {
+            throw new IllegalStateException("Maximum vertices limit reached.");
+        }
+        indicesMap.putIfAbsent(vertex, currentVertexCount++);
     }
 
     @Override
@@ -54,29 +64,19 @@ class UndirectedUnweightedMatrixGraph implements UnweightedGraph {
     }
 
     @Override
-    public Vertex findUnvisitedAdjacent(Vertex vertex) {
+    public List<Vertex> getNeighbors(Vertex vertex) {
         Integer index = indicesMap.get(vertex);
         if (index == null) {
             throw new IllegalArgumentException("Vertex does not exist in the graph");
         }
+        List<Vertex> neighbors = new ArrayList<>();
+
         for (int i = 0; i < adjacencyMatrix[index].length; i++) {
             if (adjacencyMatrix[index][i] == 1) { // Check if there's an edge
-                Vertex adjacentVertex = GetVertexByIndex(indicesMap, i); // Find the vertex by its index
-                if (adjacentVertex != null && !adjacentVertex.isVisited()) {
-                    return adjacentVertex;
-                }
+                Vertex neighbor = VertexUtil.getVertexByIndex(indicesMap, i);
+                neighbors.add(neighbor);
             }
         }
-        return null;
-    }
-
-    // Helper method to find a vertex by its index
-    private static Vertex GetVertexByIndex(Map<Vertex, Integer> map, Integer value) {
-        for (Map.Entry<Vertex, Integer> entry : map.entrySet()) {
-            if (value.equals(entry.getValue())) {
-                return entry.getKey();
-            }
-        }
-        return null;
+        return neighbors;
     }
 }

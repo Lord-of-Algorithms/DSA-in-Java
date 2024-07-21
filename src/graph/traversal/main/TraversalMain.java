@@ -1,7 +1,10 @@
 package graph.traversal.main;
 
-import graph.traversal.GraphTraversal;
-import graph.traversal.UnweightedGraph;
+import graph.GraphRepresentation;
+import graph.Vertex;
+import graph.VertexImpl;
+import graph.traversal.algorithms.GraphTraversal;
+import graph.traversal.graph.ExplorableGraph;
 
 public class TraversalMain {
 
@@ -11,13 +14,13 @@ public class TraversalMain {
      */
     public static void main(String[] args) {
         // Create vertices for the graph
-        GraphVertex a = new GraphVertex("A");
-        GraphVertex b = new GraphVertex("B");
-        GraphVertex c = new GraphVertex("C");
-        GraphVertex d = new GraphVertex("D");
+        Vertex a = new VertexImpl("A");
+        Vertex b = new VertexImpl("B");
+        Vertex c = new VertexImpl("C");
+        Vertex d = new VertexImpl("D");
 
         // Create an unweighted graph using the factory method and add vertices to it
-        UnweightedGraph graph = GraphFactory.createGraph(GraphRepresentation.MATRIX, new GraphVertex[]{a, b, c, d});
+        ExplorableGraph graph = GraphFactory.createGraph(GraphRepresentation.LIST, new Vertex[]{a, b, c, d});
 
         // Establish edges between the vertices
         graph.setEdge(a, b);

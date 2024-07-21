@@ -1,7 +1,6 @@
-package graph.traversal.main;
+package graph.traversal.graph;
 
-import graph.traversal.UnweightedGraph;
-import graph.traversal.Vertex;
+import graph.Vertex;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Map;
 /**
  * Represents an undirected and unweighted graph using an adjacency list representation.
  */
-public class UndirectedUnweightedListGraph implements UnweightedGraph {
+public class ExplorableListGraph implements ExplorableGraph {
 
     /**
      * The adjacency list representation of the graph, where each key (a {@link Vertex})
@@ -19,18 +18,16 @@ public class UndirectedUnweightedListGraph implements UnweightedGraph {
      */
     private final Map<Vertex, List<Vertex>> adjacencyList;
 
-    UndirectedUnweightedListGraph(GraphVertex[] vertices) {
-        if (vertices == null || vertices.length == 0) {
-            throw new IllegalArgumentException("Vertex array cannot be null or empty.");
-        }
-
+    public ExplorableListGraph() {
         adjacencyList = new HashMap<>();
-        for (GraphVertex graphVertex : vertices) {
-            if (graphVertex == null) {
-                throw new IllegalArgumentException("Vertex cannot be null.");
-            }
-            adjacencyList.put(graphVertex, new ArrayList<>()); // Initialize adjacency list for each graphVertex
+    }
+
+    @Override
+    public void addVertex(Vertex vertex) {
+        if (vertex == null) {
+            throw new IllegalArgumentException("Vertex cannot be null.");
         }
+        adjacencyList.putIfAbsent(vertex, new ArrayList<>()); // Initialize adjacency list for given vertex
     }
 
     @Override
@@ -56,17 +53,7 @@ public class UndirectedUnweightedListGraph implements UnweightedGraph {
     }
 
     @Override
-    public Vertex findUnvisitedAdjacent(Vertex vertex) {
-        List<Vertex> neighbors = adjacencyList.get(vertex);
-        if (neighbors == null) {
-            throw new IllegalArgumentException("Vertex does not exist in the graph");
-        }
-
-        for (Vertex neighbor : neighbors) {
-            if (!neighbor.isVisited()) {
-                return neighbor;
-            }
-        }
-        return null;
+    public List<Vertex> getNeighbors(Vertex vertex) {
+        return adjacencyList.get(vertex);
     }
 }

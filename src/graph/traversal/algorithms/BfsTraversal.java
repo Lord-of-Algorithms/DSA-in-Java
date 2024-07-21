@@ -1,50 +1,29 @@
 package graph.traversal.algorithms;
 
-import graph.traversal.GraphTraversal;
-import graph.traversal.UnweightedGraph;
-import graph.traversal.Vertex;
+import graph.Vertex;
+import graph.traversal.graph.ExplorableGraph;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
- * Implements the Breadth-First Search (BFS) traversal algorithm for graphs.
+ * Implements the Breadth-First Search (BFS) traversal algorithm for graph.
  */
-public class BfsTraversal implements GraphTraversal {
-
-    private final List<Vertex> traversalPath;
-
-    public BfsTraversal() {
-        traversalPath = new ArrayList<>();
-    }
+public class BfsTraversal extends BaseGraphTraversal {
 
     @Override
-    public void traverse(UnweightedGraph graph, Vertex vertex) {
+    public void traverse(ExplorableGraph graph, Vertex startVertex) {
         Queue<Vertex> queue = new LinkedList<>();
-        vertex.visit();
-        traversalPath.add(vertex);
-        queue.add(vertex);
+        visit(startVertex);
+        queue.add(startVertex);
         while (!queue.isEmpty()) {
             Vertex head = queue.remove();
-            Vertex adjacent;
-            while ((adjacent = graph.findUnvisitedAdjacent(head)) != null) {
-                adjacent.visit();
-                traversalPath.add(adjacent);
-                queue.add(adjacent);
+            Vertex unvisitedNeighbor;
+            while ((unvisitedNeighbor = findUnvisitedNeighbor(graph, head)) != null) {
+                visit(unvisitedNeighbor);
+                queue.add(unvisitedNeighbor);
             }
         }
-    }
-
-    @Override
-    public List<Vertex> getTraversalPath() {
-        return Collections.unmodifiableList(traversalPath);
-    }
-
-    @Override
-    public void resetState() {
-        for (Vertex v : traversalPath) {
-            v.resetVisitedStatus();
-        }
-        traversalPath.clear();
     }
 
     @Override

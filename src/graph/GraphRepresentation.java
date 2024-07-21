@@ -1,4 +1,4 @@
-package graph.traversal.main;
+package graph;
 
 /**
  * Enumerates the possible graph representations.

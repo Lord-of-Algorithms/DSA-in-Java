@@ -1,51 +1,30 @@
 package graph.traversal.algorithms;
 
-import graph.traversal.GraphTraversal;
-import graph.traversal.UnweightedGraph;
-import graph.traversal.Vertex;
+import graph.Vertex;
+import graph.traversal.graph.ExplorableGraph;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
- * Implements the Depth-First Search (DFS) traversal algorithm for graphs.
+ * Implements the Depth-First Search (DFS) traversal algorithm for graph.
  */
-public class DfsTraversal implements GraphTraversal {
-
-    private final List<Vertex> traversalPath;
-
-    public DfsTraversal() {
-        traversalPath = new ArrayList<>();
-    }
+public class DfsTraversal extends BaseGraphTraversal {
 
     @Override
-    public void traverse(UnweightedGraph graph, Vertex vertex) {
+    public void traverse(ExplorableGraph graph, Vertex startVertex) {
         Deque<Vertex> stack = new ArrayDeque<>();
-        vertex.visit();
-        traversalPath.add(vertex);
-        stack.push(vertex);
+        visit(startVertex);
+        stack.push(startVertex);
         while (!stack.isEmpty()) {
-            Vertex adjacent = graph.findUnvisitedAdjacent(stack.peek());
-            if (adjacent == null) {
+            Vertex unvisitedNeighbor = findUnvisitedNeighbor(graph, stack.peek());
+            if (unvisitedNeighbor == null) {
                 stack.pop();
             } else {
-                adjacent.visit();
-                traversalPath.add(adjacent);
-                stack.push(adjacent);
+                visit(unvisitedNeighbor);
+                stack.push(unvisitedNeighbor);
             }
         }
-    }
-
-    @Override
-    public List<Vertex> getTraversalPath() {
-        return Collections.unmodifiableList(traversalPath);
-    }
-
-    @Override
-    public void resetState() {
-        for (Vertex v : traversalPath) {
-            v.resetVisitedStatus();
-        }
-        traversalPath.clear();
     }
 
     @Override

@@ -3,12 +3,17 @@ package graph.traversal.main;
 import graph.traversal.algorithms.BfsTraversal;
 import graph.traversal.algorithms.DfsRecursiveTraversal;
 import graph.traversal.algorithms.DfsTraversal;
-import graph.traversal.GraphTraversal;
+import graph.traversal.algorithms.GraphTraversal;
 
 /**
  * Factory for creating instances of {@link GraphTraversal} based on the specified traversal method.
  */
 class GraphTraversalFactory {
+
+    private GraphTraversalFactory() {
+        // Prevents instantiation
+    }
+
     static GraphTraversal createTraversal(TraversalMethod method) {
         switch (method) {
             case DFS:

@@ -1,54 +1,29 @@
 package graph.traversal.algorithms;
 
-import graph.traversal.GraphTraversal;
-import graph.traversal.UnweightedGraph;
-import graph.traversal.Vertex;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import graph.Vertex;
+import graph.traversal.graph.ExplorableGraph;
 
 /**
- * Implements the recursive Depth-First Search (DFS) traversal algorithm for graphs.
+ * Implements the recursive Depth-First Search (DFS) traversal algorithm for graph.
  */
-public class DfsRecursiveTraversal implements GraphTraversal {
-
-    private final List<Vertex> traversalPath;
-
-    public DfsRecursiveTraversal() {
-        traversalPath = new ArrayList<>();
-    }
+public class DfsRecursiveTraversal extends BaseGraphTraversal {
 
     @Override
-    public void traverse(UnweightedGraph graph, Vertex vertex) {
-        recursiveDfs(graph, vertex);
+    public void traverse(ExplorableGraph graph, Vertex startVertex) {
+        recursiveDfs(graph, startVertex);
     }
 
     /**
      * Recursively performs depth-first search starting from the given vertex entity.
      */
-    private void recursiveDfs(UnweightedGraph graph, Vertex vertex) {
-        vertex.visit();
-        traversalPath.add(vertex);
+    private void recursiveDfs(ExplorableGraph graph, Vertex vertex) {
+        visit(vertex);
 
-        // Recursively visit all unvisited adjacent vertices
-        Vertex adjacent;
-        while ((adjacent = graph.findUnvisitedAdjacent(vertex)) != null) {
-            recursiveDfs(graph, adjacent);
+        // Recursively visit all unvisited neighbor vertices
+        Vertex unvisitedNeighbor;
+        while ((unvisitedNeighbor = findUnvisitedNeighbor(graph, vertex)) != null) {
+            recursiveDfs(graph, unvisitedNeighbor);
         }
-    }
-
-    @Override
-    public List<Vertex> getTraversalPath() {
-        return Collections.unmodifiableList(traversalPath);
-    }
-
-    @Override
-    public void resetState() {
-        for (Vertex v : traversalPath) {
-            v.resetVisitedStatus();
-        }
-        traversalPath.clear();
     }
 
     @Override

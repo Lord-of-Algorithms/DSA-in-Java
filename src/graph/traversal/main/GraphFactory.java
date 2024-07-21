@@ -1,19 +1,34 @@
 package graph.traversal.main;
 
-import graph.traversal.UnweightedGraph;
+import graph.GraphRepresentation;
+import graph.Vertex;
+import graph.traversal.graph.ExplorableGraph;
+import graph.traversal.graph.ExplorableListGraph;
+import graph.traversal.graph.ExplorableMatrixGraph;
 
 /**
- * Factory for creating instances of {@link UnweightedGraph} based on the specified graph representation.
+ * Factory for creating instances of {@link ExplorableGraph} based on the specified graph representation.
  */
 class GraphFactory {
-    static UnweightedGraph createGraph(GraphRepresentation representation, GraphVertex[] vertices) {
+    private GraphFactory() {
+        // Prevents instantiation
+    }
+
+    static ExplorableGraph createGraph(GraphRepresentation representation, Vertex[] vertices) {
+        ExplorableGraph graph;
         switch (representation) {
             case MATRIX:
-                return new UndirectedUnweightedMatrixGraph(vertices);
+                graph = new ExplorableMatrixGraph(vertices.length);
+                break;
             case LIST:
-                return new UndirectedUnweightedListGraph(vertices);
+                graph = new ExplorableListGraph();
+                break;
             default:
                 throw new IllegalArgumentException("Unknown representation method: " + representation);
         }
+        for (Vertex vertex : vertices) {
+            graph.addVertex(vertex);
+        }
+        return graph;
     }
 }
