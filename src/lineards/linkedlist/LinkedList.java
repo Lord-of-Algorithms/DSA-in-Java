@@ -85,6 +85,7 @@ public class LinkedList {
         if (head.data == value) {
             // Delete the head
             head = head.next;
+            return;
         }
         Node pred = head;
         Node temp = head.next;
@@ -111,6 +112,7 @@ public class LinkedList {
         if (head.next == null) {
             // There is only one node
             head = null;
+            return;
         }
         Node pred = head;
         Node temp = head.next;
