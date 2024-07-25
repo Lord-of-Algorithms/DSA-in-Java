@@ -17,14 +17,14 @@ public class StaticArrayQueue implements Queue {
     /**
      * Constructs a new Queue with a specified capacity.
      */
-    public StaticArrayQueue(int capacity) {
-        if (capacity < 1) {
-            throw new IllegalArgumentException("Capacity must be at least 1");
+    public StaticArrayQueue(int size) {
+        if (size < 1) {
+            throw new IllegalArgumentException("Size must be at least 1");
         }
-        data = new char[capacity];
+        data = new char[size];
         front = 0;
         rear = -1;
-        size = 0;
+        this.size = 0;
     }
 
     /**
@@ -32,6 +32,7 @@ public class StaticArrayQueue implements Queue {
      *
      * @return true if the queue has no elements, false otherwise.
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -50,6 +51,7 @@ public class StaticArrayQueue implements Queue {
      *
      * @param value The character to add.
      */
+    @Override
     public void enqueue(char value) {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
@@ -65,6 +67,7 @@ public class StaticArrayQueue implements Queue {
      * @return The character at the front of the queue.
      * @throws NoSuchElementException if the queue is empty.
      */
+    @Override
     public char dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
@@ -78,6 +81,7 @@ public class StaticArrayQueue implements Queue {
     /**
      * Returns the character at the front of the queue without removing it.
      */
+    @Override
     public char peek() {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
