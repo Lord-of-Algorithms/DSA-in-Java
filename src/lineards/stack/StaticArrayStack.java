@@ -13,13 +13,15 @@ public class StaticArrayStack implements Stack {
     private int top;
 
     /**
-     * Constructor to initialize the stack with a given size.
+     * Constructor to initialize the stack with a given capacity.
+     *
+     * @param capacity The maximum number of items that the stack can hold.
      */
-    public StaticArrayStack(int size) {
-        if (size < 1) {
-            throw new IllegalArgumentException("Size must be at least 1");
+    public StaticArrayStack(int capacity) {
+        if (capacity < 1) {
+            throw new IllegalArgumentException("Capacity must be at least 1");
         }
-        data = new char[size];
+        data = new char[capacity];
         top = -1;
     }
 

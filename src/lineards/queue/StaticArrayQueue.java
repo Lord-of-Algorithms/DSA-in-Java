@@ -15,16 +15,18 @@ public class StaticArrayQueue implements Queue {
     private int size;
 
     /**
-     * Constructs a new Queue with a specified capacity.
+     * Constructs a new queue with a specified capacity.
+     *
+     * @param capacity The maximum number of items that the queue can hold.
      */
-    public StaticArrayQueue(int size) {
-        if (size < 1) {
-            throw new IllegalArgumentException("Size must be at least 1");
+    public StaticArrayQueue(int capacity) {
+        if (capacity < 1) {
+            throw new IllegalArgumentException("Capacity must be at least 1");
         }
-        data = new char[size];
+        data = new char[capacity];
         front = 0;
         rear = -1;
-        this.size = 0;
+        size = 0;
     }
 
     /**
