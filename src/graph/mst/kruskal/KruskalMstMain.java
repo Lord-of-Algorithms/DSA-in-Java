@@ -72,6 +72,10 @@ public class KruskalMstMain {
             if (uf.find(edge.getSource()) != uf.find(edge.getDestination())) {
                 mst.add(edge);
                 uf.union(edge.getSource(), edge.getDestination());
+                if (mst.size() == vertices.size() - 1) {
+                    // Stop when MST is complete
+                    break;
+                }
             }
         }
         return mst;
