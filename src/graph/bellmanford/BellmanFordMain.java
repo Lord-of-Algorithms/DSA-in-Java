@@ -153,12 +153,12 @@ public class BellmanFordMain {
         List<Vertex> vertices = new ArrayList<>(Arrays.asList(a, b, c, d, e, f));
 
         List<Edge> edges = new ArrayList<>();
-        edges.add(new Edge(a, b,   5));
-        edges.add(new Edge(a, d,   2));
-        edges.add(new Edge(b, c,   5));
-        edges.add(new Edge(c, f,  10));
-        edges.add(new Edge(d, e,   5));
-        edges.add(new Edge(e, f,   7));
+        edges.add(new Edge(a, b, 5));
+        edges.add(new Edge(a, d, 2));
+        edges.add(new Edge(b, c, 5));
+        edges.add(new Edge(c, f, 10));
+        edges.add(new Edge(d, e, 5));
+        edges.add(new Edge(e, f, 7));
         edges.add(new Edge(e, b, -10));
 
         BellmanFordResult result = bellmanFord(vertices, edges, a);
@@ -201,12 +201,12 @@ public class BellmanFordMain {
         List<Vertex> vertices = new ArrayList<>(Arrays.asList(a, b, c, d, e, f));
 
         List<Edge> edges = new ArrayList<>();
-        edges.add(new Edge(a, b,   5));
-        edges.add(new Edge(a, d,   2));
-        edges.add(new Edge(b, c,   3));
-        edges.add(new Edge(c, f,   4));
-        edges.add(new Edge(d, e,   5));
-        edges.add(new Edge(f, e,   2));
+        edges.add(new Edge(a, b, 5));
+        edges.add(new Edge(a, d, 2));
+        edges.add(new Edge(b, c, 3));
+        edges.add(new Edge(c, f, 4));
+        edges.add(new Edge(d, e, 5));
+        edges.add(new Edge(f, e, 2));
         edges.add(new Edge(e, b, -15));  // Creates negative cycle: B → C → F → E → B
 
         BellmanFordResult result = bellmanFord(vertices, edges, a);
@@ -217,10 +217,6 @@ public class BellmanFordMain {
             System.out.println("No negative cycle found.");
         }
     }
-
-    // -------------------------------------------------------------------------
-    // Result holder
-    // -------------------------------------------------------------------------
 
     /**
      * Holds the output of the Bellman-Ford algorithm: shortest distances from the source,
