@@ -104,6 +104,24 @@ public class BellmanFordMain {
     }
 
     /**
+     * Holds the output of the Bellman-Ford algorithm: shortest distances from the source,
+     * the predecessor map for path reconstruction, and a flag indicating a negative cycle.
+     */
+    private static class BellmanFordResult {
+        final Map<Vertex, Integer> distances;
+        final Map<Vertex, Vertex> predecessors;
+        final boolean hasNegativeCycle;
+
+        BellmanFordResult(Map<Vertex, Integer> distances,
+                          Map<Vertex, Vertex> predecessors,
+                          boolean hasNegativeCycle) {
+            this.distances = distances;
+            this.predecessors = predecessors;
+            this.hasNegativeCycle = hasNegativeCycle;
+        }
+    }
+
+    /**
      * Reconstructs the shortest path from the source to the given target vertex
      * by following the predecessor chain.
      *
@@ -215,24 +233,6 @@ public class BellmanFordMain {
             System.out.println("Negative cycle detected — no finite shortest paths exist.");
         } else {
             System.out.println("No negative cycle found.");
-        }
-    }
-
-    /**
-     * Holds the output of the Bellman-Ford algorithm: shortest distances from the source,
-     * the predecessor map for path reconstruction, and a flag indicating a negative cycle.
-     */
-    private static class BellmanFordResult {
-        final Map<Vertex, Integer> distances;
-        final Map<Vertex, Vertex> predecessors;
-        final boolean hasNegativeCycle;
-
-        BellmanFordResult(Map<Vertex, Integer> distances,
-                          Map<Vertex, Vertex> predecessors,
-                          boolean hasNegativeCycle) {
-            this.distances = distances;
-            this.predecessors = predecessors;
-            this.hasNegativeCycle = hasNegativeCycle;
         }
     }
 }
