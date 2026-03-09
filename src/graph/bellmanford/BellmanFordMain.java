@@ -20,12 +20,6 @@ public class BellmanFordMain {
     // Represents infinity: half of Integer.MAX_VALUE to avoid arithmetic overflow
     private static final int INFINITY = Integer.MAX_VALUE / 2;
 
-    public static void main(String[] args) {
-        demonstrateNormalGraph();
-        System.out.println();
-        demonstrateNegativeCycleGraph();
-    }
-
     /**
      * Computes the shortest paths from a source vertex to all other vertices using the
      * Bellman-Ford algorithm.
@@ -141,9 +135,11 @@ public class BellmanFordMain {
         return path;
     }
 
-    // -------------------------------------------------------------------------
-    // Demos
-    // -------------------------------------------------------------------------
+    public static void main(String[] args) {
+        demonstrateNormalGraph();
+        System.out.println();
+        demonstrateNegativeCycleGraph();
+    }
 
     /**
      * Graph with a negative edge but no negative cycle.
