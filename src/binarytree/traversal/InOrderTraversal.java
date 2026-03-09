@@ -1,6 +1,6 @@
 package binarytree.traversal;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -8,7 +8,7 @@ import java.util.Deque;
 /**
  * Class for performing in-order traversal on a binary tree.
  */
-public class InOrderTraversal implements ITraversal {
+public class InOrderTraversal implements Traversal {
 
     private final TraversalNature traversalNature;
 
@@ -17,7 +17,7 @@ public class InOrderTraversal implements ITraversal {
     }
 
     @Override
-    public void traverse(INode root) {
+    public void traverse(TreeNode root) {
         if (traversalNature == TraversalNature.Iterative) {
             iterativeInOrderTraverse(root);
         } else {
@@ -28,12 +28,12 @@ public class InOrderTraversal implements ITraversal {
     /**
      * Iteratively traverses a binary tree in an in-order manner.
      */
-    private static void iterativeInOrderTraverse(INode root) {
+    private static void iterativeInOrderTraverse(TreeNode root) {
         if (root == null) {
             return;
         }
-        Deque<INode> stack = new ArrayDeque<>();
-        INode node = root;
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode node = root;
 
         while (!stack.isEmpty() || node != null) {
             if (node != null) {
@@ -55,7 +55,7 @@ public class InOrderTraversal implements ITraversal {
     /**
      * Recursively traverses a binary tree in an in-order manner.
      */
-    private static void recursiveInOrderTraverse(INode node) {
+    private static void recursiveInOrderTraverse(TreeNode node) {
         if (node == null) {
             return;
         }

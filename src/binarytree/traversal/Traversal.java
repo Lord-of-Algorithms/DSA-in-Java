@@ -1,14 +1,14 @@
 package binarytree.traversal;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 /**
  * Interface for implementing different traversal strategies on a binary tree.
  */
-public interface ITraversal {
+public interface Traversal {
     /**
      * Performs traversal of a binary tree.
      * @param root The root node of the tree to traverse.
      */
-    void traverse(INode root);
+    void traverse(TreeNode root);
 }

@@ -1,18 +1,18 @@
 package binarytree.bst.standard;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 import binarytree.bst.BstUtils;
-import binarytree.bst.ITree;
+import binarytree.bst.Tree;
 
 /**
  * Implementation of a binary search tree with recursive methods.
  */
-public class BinarySearchTreeRecursive implements ITree {
+public class BinarySearchTreeRecursive implements Tree {
 
-    private Node root;
+    private BstNode root;
 
     @Override
-    public INode getRoot() {
+    public TreeNode getRoot() {
         return root;
     }
 
@@ -28,10 +28,10 @@ public class BinarySearchTreeRecursive implements ITree {
      * @param key     The key of the new node to be inserted.
      * @return The modified subtree with the new node inserted.
      */
-    private Node insertRecursive(Node current, int key) {
+    private BstNode insertRecursive(BstNode current, int key) {
         // Base case: If the current node is null, a new node is created and returned.
         if (current == null) {
-            return new Node(key);
+            return new BstNode(key);
         }
 
         // If the key to insert is less than the current node's key, insert in the left subtree.
@@ -62,7 +62,7 @@ public class BinarySearchTreeRecursive implements ITree {
      * @param key     The key of the node to be deleted.
      * @return The modified subtree after deletion.
      */
-    private Node deleteRecursive(Node current, int key) {
+    private BstNode deleteRecursive(BstNode current, int key) {
         if (current == null) return null;
 
         // Traverse the left subtree if the key to delete is smaller than the current node's key
@@ -89,7 +89,7 @@ public class BinarySearchTreeRecursive implements ITree {
     }
 
     @Override
-    public INode search(int key) {
+    public TreeNode search(int key) {
         return BstUtils.searchRecursive(root, key);
     }
 }

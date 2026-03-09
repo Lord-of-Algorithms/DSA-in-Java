@@ -1,11 +1,11 @@
 package binarytree.bst.avl;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 /**
  * Represents a node in an AVL tree, implementing the INode interface.
  */
-public class AvlNode implements INode {
+public class AvlNode implements TreeNode {
 
     int key;
     AvlNode left;
@@ -22,12 +22,12 @@ public class AvlNode implements INode {
     }
 
     @Override
-    public INode getLeft() {
+    public TreeNode getLeft() {
         return left;
     }
 
     @Override
-    public INode getRight() {
+    public TreeNode getRight() {
         return right;
     }
 

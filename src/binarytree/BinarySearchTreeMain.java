@@ -1,6 +1,6 @@
 package binarytree;
 
-import binarytree.bst.ITree;
+import binarytree.bst.Tree;
 import binarytree.bst.avl.AvlTree;
 import binarytree.bst.red_black.RedBlackTree;
 import binarytree.bst.standard.BinarySearchTreeIterative;
@@ -14,7 +14,7 @@ public class BinarySearchTreeMain {
     public static void main(String[] args) {
         // Create a binary search tree with the specified type:
         // BST (StandardIterative or StandardRecursive), AVL and Red-Black.
-        ITree tree = createTree(BstType.RedBlack);
+        Tree tree = createTree(BstType.RedBlack);
 
         // Inserting various keys into the tree.
         insertKeysIntoTree(tree, new int[]{20, 7, 9, 2, 40, 22, 70, 70, 25});
@@ -49,7 +49,7 @@ public class BinarySearchTreeMain {
      * @param treeType The type of the binary search tree.
      * @return An instance of ITree corresponding to the specified type.
      */
-    private static ITree createTree(BstType treeType) {
+    private static Tree createTree(BstType treeType) {
         switch (treeType) {
             case StandardIterative:
                 return new BinarySearchTreeIterative();
@@ -70,7 +70,7 @@ public class BinarySearchTreeMain {
      * @param tree The binary search tree instance.
      * @param keys An array of keys to delete.
      */
-    private static void insertKeysIntoTree(ITree tree, int[] keys) {
+    private static void insertKeysIntoTree(Tree tree, int[] keys) {
         for (int key : keys) {
             System.out.println("Inserting key: " + key);
             tree.insert(key);
@@ -83,7 +83,7 @@ public class BinarySearchTreeMain {
      * @param tree The binary search tree instance.
      * @param keys An array of keys to delete.
      */
-    private static void deleteKeysFromTree(ITree tree, int[] keys) {
+    private static void deleteKeysFromTree(Tree tree, int[] keys) {
         for (int key : keys) {
             System.out.println("Delete node with key: " + key);
             tree.delete(key);
@@ -97,7 +97,7 @@ public class BinarySearchTreeMain {
      * @param tree The binary search tree instance.
      * @param keys An array of keys to search for.
      */
-    private static void searchKeysInTree(ITree tree, int[] keys) {
+    private static void searchKeysInTree(Tree tree, int[] keys) {
         for (int key : keys) {
             System.out.println("Search for a node with key: " + key);
             System.out.println("Is found: " + (tree.search(key) != null));
@@ -109,9 +109,9 @@ public class BinarySearchTreeMain {
      *
      * @param tree The binary search tree instance.
      */
-    private static void demonstrateTraversals(ITree tree) {
+    private static void demonstrateTraversals(Tree tree) {
         // Iterative pre-order traversal
-        ITraversal traversal = new PreOrderTraversal(TraversalNature.Iterative);
+        Traversal traversal = new PreOrderTraversal(TraversalNature.Iterative);
         System.out.println("\nPre-order traversal: ");
         traversal.traverse(tree.getRoot());
 

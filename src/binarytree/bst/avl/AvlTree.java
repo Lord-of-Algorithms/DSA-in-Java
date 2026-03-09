@@ -1,18 +1,18 @@
 package binarytree.bst.avl;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 import binarytree.bst.BstUtils;
-import binarytree.bst.ITree;
+import binarytree.bst.Tree;
 
 /**
  * Represents an AVL tree, a self-balancing binary search tree.
  */
-public class AvlTree implements ITree {
+public class AvlTree implements Tree {
 
     private AvlNode root; // Root of the AVL tree
 
     @Override
-    public INode getRoot() {
+    public TreeNode getRoot() {
         return root;
     }
 
@@ -213,7 +213,7 @@ public class AvlTree implements ITree {
     }
 
     @Override
-    public INode search(int key) {
+    public TreeNode search(int key) {
         return BstUtils.searchRecursive(root, key);
     }
 }

@@ -1,32 +1,32 @@
 package binarytree.bst.standard;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 import binarytree.bst.BstUtils;
-import binarytree.bst.ITree;
+import binarytree.bst.Tree;
 
 /**
  * Implementation of a binary search tree with iterative methods.
  */
-public class BinarySearchTreeIterative implements ITree {
+public class BinarySearchTreeIterative implements Tree {
 
-    private Node root;
+    private BstNode root;
 
     @Override
-    public INode getRoot() {
+    public TreeNode getRoot() {
         return root;
     }
 
     @Override
     public void insert(int key) {
-        Node newNode = new Node(key);
+        BstNode newNode = new BstNode(key);
         // Handle the case of an empty tree.
         if (root == null) {
             root = newNode;
             return;
         }
 
-        Node current = root;
-        Node parent = null;
+        BstNode current = root;
+        BstNode parent = null;
 
         // Traverse the tree to find the appropriate insertion point.
         while (current != null) {
@@ -57,8 +57,8 @@ public class BinarySearchTreeIterative implements ITree {
             return;
         }
 
-        Node nodeToDelete = root;
-        Node parentNode = null;
+        BstNode nodeToDelete = root;
+        BstNode parentNode = null;
 
         // Find the node to delete and its parent
         while (nodeToDelete != null && nodeToDelete.key != key) {
@@ -91,7 +91,7 @@ public class BinarySearchTreeIterative implements ITree {
         }
         // Case 2: Node has only one child
         else if (nodeToDelete.left == null || nodeToDelete.right == null) {
-            Node childNode = (nodeToDelete.left != null) ? nodeToDelete.left : nodeToDelete.right;
+            BstNode childNode = (nodeToDelete.left != null) ? nodeToDelete.left : nodeToDelete.right;
 
             if (isRootNode) {
                 root = childNode;
@@ -104,8 +104,8 @@ public class BinarySearchTreeIterative implements ITree {
         // Case 3: Node has two children
         else {
             // Find the in-order successor (smallest in the right subtree)
-            Node successor = nodeToDelete.right;
-            Node successorParent = nodeToDelete;
+            BstNode successor = nodeToDelete.right;
+            BstNode successorParent = nodeToDelete;
             while (successor.left != null) {
                 successorParent = successor;
                 successor = successor.left;
@@ -135,8 +135,8 @@ public class BinarySearchTreeIterative implements ITree {
     }
 
     @Override
-    public INode search(int key) {
-        Node current = root;
+    public TreeNode search(int key) {
+        BstNode current = root;
         while (current != null) {
             if (key == current.key) {
                 return current; // Node found

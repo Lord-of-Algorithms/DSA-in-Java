@@ -1,16 +1,16 @@
 package binarytree.bst.standard;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 /**
  * Represents a node in a binary tree, implementing the INode interface.
  */
-public class Node implements INode {
+public class BstNode implements TreeNode {
     public int key;
-    public Node left;
-    public Node right;
+    public BstNode left;
+    public BstNode right;
 
-    Node(int key) {
+    BstNode(int key) {
         this.key = key;
     }
 
@@ -20,12 +20,12 @@ public class Node implements INode {
     }
 
     @Override
-    public INode getLeft() {
+    public TreeNode getLeft() {
         return left;
     }
 
     @Override
-    public INode getRight() {
+    public TreeNode getRight() {
         return right;
     }
 

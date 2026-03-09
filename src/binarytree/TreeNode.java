@@ -3,7 +3,7 @@ package binarytree;
 /**
  * Interface defining the basic structure and functionality of a node in a binary tree.
  */
-public interface INode {
+public interface TreeNode {
 
     /**
      * Gets the key value of this node.
@@ -15,14 +15,14 @@ public interface INode {
      *
      * @return The left child node.
      */
-    INode getLeft();
+    TreeNode getLeft();
 
     /**
      * Gets the right child of this node.
      *
      * @return The right child node.
      */
-    INode getRight();
+    TreeNode getRight();
 
     /**
      * Processes or visits the current node.

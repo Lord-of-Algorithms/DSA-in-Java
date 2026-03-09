@@ -1,13 +1,13 @@
 package binarytree.bst.red_black;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 /**
  * Represents a node in a Red-Black Tree.
  * Each node contains a key, links to left and right children, and a parent node.
  * The node also has a color (red or black) and a flag indicating if it's a sentinel node.
  */
-public class RbNode implements INode {
+public class RbNode implements TreeNode {
 
     int key;
     RbNode left;
@@ -92,7 +92,7 @@ public class RbNode implements INode {
     }
 
     @Override
-    public INode getLeft() {
+    public TreeNode getLeft() {
         if (left != null && !left.isSentinel) {
             return left;
         } else {
@@ -101,7 +101,7 @@ public class RbNode implements INode {
     }
 
     @Override
-    public INode getRight() {
+    public TreeNode getRight() {
         if (right != null && !right.isSentinel) {
             return right;
         } else {

@@ -1,6 +1,6 @@
 package binarytree.traversal;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -8,15 +8,15 @@ import java.util.Queue;
 /**
  * Class for performing breadth-first traversal on a binary tree.
  */
-public class BreadthFirstTraversal implements ITraversal {
+public class BreadthFirstTraversal implements Traversal {
 
     @Override
-    public void traverse(INode root) {
+    public void traverse(TreeNode root) {
         if (root != null) {
-            Queue<INode> queue = new ArrayDeque<>();
+            Queue<TreeNode> queue = new ArrayDeque<>();
             queue.add(root);
             while (!queue.isEmpty()) {
-                INode node = queue.remove();
+                TreeNode node = queue.remove();
                 node.visit();
                 if (node.getLeft() != null) {
                     queue.add(node.getLeft());

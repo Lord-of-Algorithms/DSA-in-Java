@@ -1,6 +1,6 @@
 package binarytree.traversal;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -8,7 +8,7 @@ import java.util.Deque;
 /**
  * Class for performing post-order traversal on a binary tree.
  */
-public class PostOrderTraversal implements ITraversal {
+public class PostOrderTraversal implements Traversal {
 
     private final TraversalNature traversalNature;
 
@@ -17,7 +17,7 @@ public class PostOrderTraversal implements ITraversal {
     }
 
     @Override
-    public void traverse(INode root) {
+    public void traverse(TreeNode root) {
         if (traversalNature == TraversalNature.Iterative) {
             iterativePostOrderTraverse(root);
         } else {
@@ -28,18 +28,18 @@ public class PostOrderTraversal implements ITraversal {
     /**
      * Iteratively traverses a binary tree in an post-order manner.
      */
-    private static void iterativePostOrderTraverse(INode root) {
+    private static void iterativePostOrderTraverse(TreeNode root) {
         if (root == null) {
             return;
         }
-        Deque<INode> stack1 = new ArrayDeque<>();
-        Deque<INode> stack2 = new ArrayDeque<>();
+        Deque<TreeNode> stack1 = new ArrayDeque<>();
+        Deque<TreeNode> stack2 = new ArrayDeque<>();
 
         stack1.push(root);
 
         while (!stack1.isEmpty()) {
 
-            INode node = stack1.pop();
+            TreeNode node = stack1.pop();
             stack2.push(node);
 
             if (node.getLeft() != null) {
@@ -57,7 +57,7 @@ public class PostOrderTraversal implements ITraversal {
     /**
      * Recursively traverses a binary tree in an post-order manner.
      */
-    private static void recursivePostOrderTraverse(INode root) {
+    private static void recursivePostOrderTraverse(TreeNode root) {
         if (root != null) {
             // Recursively traverse the left subtree
             recursivePostOrderTraverse(root.getLeft());

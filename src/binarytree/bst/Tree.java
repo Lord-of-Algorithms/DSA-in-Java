@@ -1,16 +1,16 @@
 package binarytree.bst;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 /**
  * Interface for a binary search tree.
  */
-public interface ITree {
+public interface Tree {
 
     /**
      * Retrieves the root node of the tree.
      */
-    INode getRoot();
+    TreeNode getRoot();
 
     /**
      * Inserts a new node with the specified key into the tree.
@@ -32,5 +32,5 @@ public interface ITree {
      * @param key The key to search for.
      * @return The node with the specified key, or null if not found.
      */
-    INode search(int key);
+    TreeNode search(int key);
 }

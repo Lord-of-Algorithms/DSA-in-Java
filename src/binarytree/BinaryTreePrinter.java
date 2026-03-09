@@ -48,7 +48,7 @@ public final class BinaryTreePrinter {
      *
      * @param root The root of the tree
      */
-    public static void print(INode root) {
+    public static void print(TreeNode root) {
         print(root, NumberDigit.DoubleDigit, MaxLevel);
     }
 
@@ -59,7 +59,7 @@ public final class BinaryTreePrinter {
      * @param keyNumberDigit The number digit of the key
      * @param maxTreeLevel   The max tree level
      */
-    public static void print(INode root, NumberDigit keyNumberDigit, int maxTreeLevel) {
+    public static void print(TreeNode root, NumberDigit keyNumberDigit, int maxTreeLevel) {
         if (root == null) {
             System.out.println("The tree is empty.");
             return;
@@ -82,11 +82,11 @@ public final class BinaryTreePrinter {
             maxLevel -= 1;
         }
 
-        var levelMap = new LinkedHashMap<INode, Integer>(); // position plays a role
+        var levelMap = new LinkedHashMap<TreeNode, Integer>(); // position plays a role
         int level = 0;
         fillLevelMap(root, level, levelMap);
 
-        var nodeStartMarginMap = new HashMap<INode, Integer>();
+        var nodeStartMarginMap = new HashMap<TreeNode, Integer>();
         fillNodeStartMarginMap(root, levelMap, true, 0, false, nodeStartMarginMap, maxLevel - 1);
         System.out.println();
         printBinaryTree(root, maxLevel - 1, nodeStartMarginMap, levelMap);
@@ -106,7 +106,7 @@ public final class BinaryTreePrinter {
         }
     }
 
-    private static int getTreeMaxLevel(INode node) {
+    private static int getTreeMaxLevel(TreeNode node) {
         if (node == null)
             return 0;
         return Math.max(getTreeMaxLevel(node.getLeft()), getTreeMaxLevel(node.getRight())) + 1;
@@ -116,9 +116,9 @@ public final class BinaryTreePrinter {
      * Associates each node with its level in the binary tree.
      */
     private static void fillLevelMap(
-            INode root,
+            TreeNode root,
             int level,
-            Map<INode, Integer> levelMap
+            Map<TreeNode, Integer> levelMap
     ) {
         if (root != null) {
 
@@ -143,12 +143,12 @@ public final class BinaryTreePrinter {
      * @param startMargin start - means from the left (to not mix with left child. There is no connection between these terms).
      */
     private static void fillNodeStartMarginMap(
-            INode root,
-            Map<INode, Integer> nodeLevelMap,
+            TreeNode root,
+            Map<TreeNode, Integer> nodeLevelMap,
             boolean isRoot,
             int startMargin,
             boolean isLeftChild,
-            Map<INode, Integer> nodeStartMarginMap,
+            Map<TreeNode, Integer> nodeStartMarginMap,
             int maxLevel) {
 
         if (root != null) {
@@ -177,20 +177,20 @@ public final class BinaryTreePrinter {
      * Uses breadth-first traversal to print the nodes
      */
     private static void printBinaryTree(
-            INode root,
+            TreeNode root,
             int maxLevel,
-            Map<INode, Integer> startMarginMap,
-            Map<INode, Integer> levelMap
+            Map<TreeNode, Integer> startMarginMap,
+            Map<TreeNode, Integer> levelMap
     ) {
 
         if (root != null) {
-            Queue<INode> queue = new LinkedList<>();
+            Queue<TreeNode> queue = new LinkedList<>();
             queue.add(root);
             var currentLevel = 0;
             var currentPosition = 0;
 
             while (!queue.isEmpty()) {
-                INode node = queue.remove();
+                TreeNode node = queue.remove();
 
                 // Get the level and margin from the maps for given node.
                 int startMargin = startMarginMap.get(node);
@@ -237,7 +237,7 @@ public final class BinaryTreePrinter {
      * <p>
      * Here we adjust the "x-position" of the value to get the good looking view.
      */
-    private static void printNode(INode node) {
+    private static void printNode(TreeNode node) {
         var key = node.getKey();
         if (keyNodeValueDigits == NumberDigit.DoubleDigit.digit) {
             if (key < 10) {
@@ -268,13 +268,13 @@ public final class BinaryTreePrinter {
 
     private static void printEdges(
             int currentLevel,
-            Map<INode, Integer> startMarginMap,
-            Map<INode, Integer> levelMap,
+            Map<TreeNode, Integer> startMarginMap,
+            Map<TreeNode, Integer> levelMap,
             int iteration
     ) {
         // Get the list of nodes for each currentLevel
-        var levelNodeKeys = new ArrayList<INode>();
-        for (Map.Entry<INode, Integer> entry : levelMap.entrySet()) {
+        var levelNodeKeys = new ArrayList<TreeNode>();
+        for (Map.Entry<TreeNode, Integer> entry : levelMap.entrySet()) {
             var nodeKey = entry.getKey();
             var level = entry.getValue();
             if (level == currentLevel) {
@@ -287,7 +287,7 @@ public final class BinaryTreePrinter {
         spaceBetweenSlashAndBackSlash.append(Blank.repeat(Math.max(0, 2 * iteration)));
 
         int currentPosition = 0;
-        for (INode node : levelNodeKeys) {
+        for (TreeNode node : levelNodeKeys) {
             int startMargin = startMarginMap.get(node);
             int slashPosition = startMargin - currentPosition - iteration + (keyNodeValueDigits / 2 - 1);
 

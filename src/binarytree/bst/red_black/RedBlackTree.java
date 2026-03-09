@@ -1,15 +1,15 @@
 package binarytree.bst.red_black;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 import binarytree.bst.BstUtils;
-import binarytree.bst.ITree;
+import binarytree.bst.Tree;
 
 /**
  * Represents a Red-Black Tree, a self-balancing binary search tree.
  * In a Red-Black Tree, each node is colored either red or black and the tree
  * maintains several balancing properties to ensure operations have logarithmic time complexity.
  */
-public class RedBlackTree implements ITree {
+public class RedBlackTree implements Tree {
 
     private RbNode root;
     private final RbNode NIL;
@@ -24,7 +24,7 @@ public class RedBlackTree implements ITree {
     }
 
     @Override
-    public INode getRoot() {
+    public TreeNode getRoot() {
         return root;
     }
 
@@ -418,7 +418,7 @@ public class RedBlackTree implements ITree {
      * @return The node containing the key, or null if the key isn't found.
      */
     @Override
-    public INode search(int key) {
+    public TreeNode search(int key) {
         return BstUtils.searchRecursive(root, key);
     }
 }

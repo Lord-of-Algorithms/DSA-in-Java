@@ -1,6 +1,6 @@
 package binarytree.bst;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 /**
  * Helper class containing common methods for binary search trees.
@@ -13,7 +13,7 @@ public class BstUtils {
     /**
      * Get the in-order successor's key (smallest in the right subtree)
      */
-    public static int minValue(INode root) {
+    public static int minValue(TreeNode root) {
         int minValue = root.getKey();
         while (root.getLeft() != null) {
             minValue = root.getLeft().getKey();
@@ -29,7 +29,7 @@ public class BstUtils {
      * @param key     The key to search for.
      * @return The node with the specified key, or null if not found.
      */
-    public static INode searchRecursive(INode current, int key) {
+    public static TreeNode searchRecursive(TreeNode current, int key) {
         if (current == null) {
             return null; // Base case: key not found or tree is empty
         }

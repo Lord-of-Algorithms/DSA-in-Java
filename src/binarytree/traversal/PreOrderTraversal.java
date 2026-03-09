@@ -1,6 +1,6 @@
 package binarytree.traversal;
 
-import binarytree.INode;
+import binarytree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -8,7 +8,7 @@ import java.util.Deque;
 /**
  * Class for performing pre-order traversal on a binary tree.
  */
-public class PreOrderTraversal implements ITraversal {
+public class PreOrderTraversal implements Traversal {
 
     private final TraversalNature traversalNature;
 
@@ -17,7 +17,7 @@ public class PreOrderTraversal implements ITraversal {
     }
 
     @Override
-    public void traverse(INode root) {
+    public void traverse(TreeNode root) {
         if (traversalNature == TraversalNature.Iterative) {
             iterativePreOrderTraverse(root);
         } else {
@@ -28,17 +28,17 @@ public class PreOrderTraversal implements ITraversal {
     /**
      * Iteratively traverses a binary tree in an pre-order manner.
      */
-    private static void iterativePreOrderTraverse(INode root) {
+    private static void iterativePreOrderTraverse(TreeNode root) {
         if (root == null) {
             return;
         }
 
-        Deque<INode> stack = new ArrayDeque<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
 
         while (!stack.isEmpty()) {
             // Pop the top item from stack
-            INode node = stack.pop();
+            TreeNode node = stack.pop();
 
             node.visit();
 
@@ -56,7 +56,7 @@ public class PreOrderTraversal implements ITraversal {
     /**
      * Recursively traverses a binary tree in an pre-order manner.
      */
-    private static void recursivePreOrderTraverse(INode node) {
+    private static void recursivePreOrderTraverse(TreeNode node) {
         if (node == null) {
             return;
         }
