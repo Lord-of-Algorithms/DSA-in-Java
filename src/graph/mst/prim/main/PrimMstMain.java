@@ -1,6 +1,6 @@
 package graph.mst.prim.main;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.GraphRepresentation;
 import graph.Vertex;
 import graph.VertexImpl;
@@ -34,7 +34,7 @@ public class PrimMstMain {
         graph.setEdge(a, d, 4);
         graph.setEdge(d, c, 5);
 
-        List<Edge> mst = buildMst(graph, a);
+        List<WeightedEdge> mst = buildMst(graph, a);
         System.out.println("MST: " + mst);
 
         // Modify an edge's weight and recompute the MST
@@ -53,14 +53,14 @@ public class PrimMstMain {
      * @throws IllegalArgumentException if the start vertex is not part of the graph.
      * @throws IllegalStateException    if the graph is disconnected and cannot form an MST.
      */
-    private static List<Edge> buildMst(PrimGraph graph, Vertex startVertex) {
+    private static List<WeightedEdge> buildMst(PrimGraph graph, Vertex startVertex) {
         if (!graph.containsVertex(startVertex)) {
             throw new IllegalArgumentException("Start vertex is not part of the graph.");
         }
 
         // It is used for checking if a vertex is already in the MST
         Set<Vertex> inTreeSet = new HashSet<>();
-        List<Edge> mst = new ArrayList<>();
+        List<WeightedEdge> mst = new ArrayList<>();
 
         int vertexCount = graph.getVertexCount();
         if (vertexCount < 1) {
@@ -73,11 +73,11 @@ public class PrimMstMain {
         while (inTreeSet.size() < vertexCount - 1) {
             inTreeSet.add(currentVertex);
 
-            List<Edge> edges = graph.getEdgesForSource(currentVertex);
-            for (Edge currentEdge : edges) {
+            List<WeightedEdge> edges = graph.getEdgesForSource(currentVertex);
+            for (WeightedEdge currentEdge : edges) {
                 Vertex neighbour = currentEdge.getDestination();
                 if (!inTreeSet.contains(neighbour)) {
-                    Edge pqEdge = pQueue.findEdgeWithDestination(neighbour);
+                    WeightedEdge pqEdge = pQueue.findEdgeWithDestination(neighbour);
                     if (pqEdge != null) {
                         if (pqEdge.getWeight() > currentEdge.getWeight()) {
                             pQueue.replace(pqEdge, currentEdge);
@@ -91,7 +91,7 @@ public class PrimMstMain {
             if (pQueue.isEmpty()) {
                 throw new IllegalStateException("Graph is disconnected, MST cannot be completed.");
             }
-            Edge edge = pQueue.pollSmallest();
+            WeightedEdge edge = pQueue.pollSmallest();
             currentVertex = edge.getDestination();
             mst.add(edge);
         }

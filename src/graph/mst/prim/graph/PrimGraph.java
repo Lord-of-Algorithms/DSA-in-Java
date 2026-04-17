@@ -1,6 +1,6 @@
 package graph.mst.prim.graph;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 import graph.WeightedGraph;
 
@@ -14,7 +14,7 @@ public interface PrimGraph extends WeightedGraph {
     /**
      * Retrieves a list of all edges originating from a specified vertex.
      */
-    List<Edge> getEdgesForSource(Vertex source);
+    List<WeightedEdge> getEdgesForSource(Vertex source);
 
     /**
      * Checks if a specific vertex is part of the graph.

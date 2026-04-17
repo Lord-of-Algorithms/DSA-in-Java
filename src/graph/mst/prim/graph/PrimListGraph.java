@@ -1,6 +1,6 @@
 package graph.mst.prim.graph;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class PrimListGraph implements PrimGraph {
 
-    private final Map<Vertex, List<Edge>> adjacencyList;
+    private final Map<Vertex, List<WeightedEdge>> adjacencyList;
 
     public PrimListGraph() {
         adjacencyList = new HashMap<>();
@@ -50,8 +50,8 @@ public class PrimListGraph implements PrimGraph {
             throw new IllegalArgumentException("Both vertices must be added to the graph before connecting them.");
         }
 
-        List<Edge> edges = adjacencyList.get(source);
-        List<Edge> reverseEdges = adjacencyList.get(destination);
+        List<WeightedEdge> edges = adjacencyList.get(source);
+        List<WeightedEdge> reverseEdges = adjacencyList.get(destination);
 
         // Remove existing edge if it exists and add new one with updated weight
         replaceOrUpdateEdge(edges, source, destination, weight);
@@ -62,19 +62,19 @@ public class PrimListGraph implements PrimGraph {
      * Replaces an existing edge between specified source and destination vertices or
      * adds a new edge if no existing edge is found.
      */
-    private void replaceOrUpdateEdge(List<Edge> edgeList, Vertex source, Vertex destination, int weight) {
-        Edge existingEdge = findEdge(edgeList, source, destination);
+    private void replaceOrUpdateEdge(List<WeightedEdge> edgeList, Vertex source, Vertex destination, int weight) {
+        WeightedEdge existingEdge = findEdge(edgeList, source, destination);
         if (existingEdge != null) {
-            edgeList.remove(existingEdge); // Remove old edge since Edge properties are final
+            edgeList.remove(existingEdge); // Remove old edge since WeightedEdge properties are final
         }
-        edgeList.add(new Edge(source, destination, weight)); // Add new edge with the updated weight
+        edgeList.add(new WeightedEdge(source, destination, weight)); // Add new edge with the updated weight
     }
 
     /**
      * Finds an edge between a specified source and destination vertex.
      */
-    private Edge findEdge(List<Edge> edges, Vertex source, Vertex destination) {
-        for (Edge e : edges) {
+    private WeightedEdge findEdge(List<WeightedEdge> edges, Vertex source, Vertex destination) {
+        for (WeightedEdge e : edges) {
             if (e.getSource().equals(source) && e.getDestination().equals(destination)) {
                 return e;
             }
@@ -83,7 +83,7 @@ public class PrimListGraph implements PrimGraph {
     }
 
     @Override
-    public List<Edge> getEdgesForSource(Vertex source) {
+    public List<WeightedEdge> getEdgesForSource(Vertex source) {
         return adjacencyList.get(source);
     }
 

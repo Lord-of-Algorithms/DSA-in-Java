@@ -1,6 +1,6 @@
 package graph.dijkstra.graph;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 
 import java.util.*;
@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class DijkstraListGraph implements DijkstraGraph {
 
-    private final Map<Vertex, List<Edge>> adjacencyList;
+    private final Map<Vertex, List<WeightedEdge>> adjacencyList;
     private final List<Vertex> vertices;
 
     /**
@@ -64,10 +64,10 @@ public class DijkstraListGraph implements DijkstraGraph {
         }
 
         if (weight < 0) {
-            throw new IllegalArgumentException("Edge weight cannot be negative.");
+            throw new IllegalArgumentException("WeightedEdge weight cannot be negative.");
         }
 
-        List<Edge> edges = adjacencyList.get(source);
+        List<WeightedEdge> edges = adjacencyList.get(source);
 
         // Remove existing edge if it exists and add new one with updated weight
         replaceOrUpdateEdge(edges, source, destination, weight);
@@ -77,19 +77,19 @@ public class DijkstraListGraph implements DijkstraGraph {
      * Replaces an existing edge between specified source and destination vertices or
      * adds a new edge if no existing edge is found.
      */
-    private void replaceOrUpdateEdge(List<Edge> edgeList, Vertex source, Vertex destination, int weight) {
-        Edge existingEdge = findEdge(edgeList, source, destination);
+    private void replaceOrUpdateEdge(List<WeightedEdge> edgeList, Vertex source, Vertex destination, int weight) {
+        WeightedEdge existingEdge = findEdge(edgeList, source, destination);
         if (existingEdge != null) {
-            edgeList.remove(existingEdge); // Remove old edge since Edge properties are final
+            edgeList.remove(existingEdge); // Remove old edge since WeightedEdge properties are final
         }
-        edgeList.add(new Edge(source, destination, weight)); // Add new edge with the updated weight
+        edgeList.add(new WeightedEdge(source, destination, weight)); // Add new edge with the updated weight
     }
 
     /**
      * Finds an edge between a specified source and destination vertex.
      */
-    private Edge findEdge(List<Edge> edges, Vertex source, Vertex destination) {
-        for (Edge e : edges) {
+    private WeightedEdge findEdge(List<WeightedEdge> edges, Vertex source, Vertex destination) {
+        for (WeightedEdge e : edges) {
             if (e.getSource().equals(source) && e.getDestination().equals(destination)) {
                 return e;
             }
@@ -105,8 +105,8 @@ public class DijkstraListGraph implements DijkstraGraph {
     @Override
     public List<Vertex> getNeighbors(Vertex vertex) {
         List<Vertex> neighbors = new ArrayList<>();
-        List<Edge> edges = adjacencyList.get(vertex);
-        for (Edge e : edges) {
+        List<WeightedEdge> edges = adjacencyList.get(vertex);
+        for (WeightedEdge e : edges) {
             neighbors.add(e.getDestination());
         }
         return neighbors;
@@ -114,8 +114,8 @@ public class DijkstraListGraph implements DijkstraGraph {
 
     @Override
     public int getEdgeWeightBetween(Vertex source, Vertex destination) {
-        List<Edge> edges = adjacencyList.get(source);
-        for (Edge e : edges) {
+        List<WeightedEdge> edges = adjacencyList.get(source);
+        for (WeightedEdge e : edges) {
             if (e.getDestination().equals(destination)) {
                 return e.getWeight();
             }

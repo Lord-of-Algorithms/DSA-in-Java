@@ -1,6 +1,6 @@
 package graph.mst.prim;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 
 import java.util.NoSuchElementException;
@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class EdgePriorityQueue {
 
     private final int maxSize;
-    private final Edge[] edges;
+    private final WeightedEdge[] edges;
     private int currentSize;
 
     /**
@@ -26,7 +26,7 @@ public class EdgePriorityQueue {
             throw new IllegalArgumentException("Maximum size must be greater than 0");
         }
         this.maxSize = maxSize;
-        edges = new Edge[maxSize];
+        edges = new WeightedEdge[maxSize];
     }
 
     /**
@@ -56,7 +56,7 @@ public class EdgePriorityQueue {
      * @param edge the edge to add
      * @throws IllegalStateException if the queue is full
      */
-    public void add(Edge edge) {
+    public void add(WeightedEdge edge) {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
         }
@@ -78,7 +78,7 @@ public class EdgePriorityQueue {
      *
      * @return the smallest weight edge, or null if the queue is empty
      */
-    Edge peekSmallest() {
+    WeightedEdge peekSmallest() {
         return currentSize == 0 ? null : edges[currentSize - 1];
     }
 
@@ -88,7 +88,7 @@ public class EdgePriorityQueue {
      * @return the smallest weight edge
      * @throws NoSuchElementException if the queue is empty
      */
-    public Edge pollSmallest() {
+    public WeightedEdge pollSmallest() {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
         }
@@ -103,7 +103,7 @@ public class EdgePriorityQueue {
      * @param replacement the new edge to insert
      * @throws NoSuchElementException if the target edge is not found
      */
-    public void replace(Edge target, Edge replacement) {
+    public void replace(WeightedEdge target, WeightedEdge replacement) {
         int index = -1;
         for (int i = 0; i < currentSize; i++) {
             if (edges[i].equals(target)) {
@@ -128,7 +128,7 @@ public class EdgePriorityQueue {
      * @param destination the vertex destination of the edge to find
      * @return the edge with the specified destination, or null if no such edge exists
      */
-    public Edge findEdgeWithDestination(Vertex destination) {
+    public WeightedEdge findEdgeWithDestination(Vertex destination) {
         int index = -1;
         for (int i = 0; i < currentSize; i++) {
             if (edges[i].getDestination().equals(destination)) {

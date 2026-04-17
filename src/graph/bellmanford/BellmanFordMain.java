@@ -1,6 +1,6 @@
 package graph.bellmanford;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 import graph.VertexImpl;
 
@@ -30,12 +30,12 @@ public class BellmanFordMain {
      * @return a {@link BellmanFordResult} containing distances, predecessors, and a negative-cycle flag
      * @throws IllegalArgumentException if the vertex or edge list is null or empty, or if the source is not in the graph
      */
-    private static BellmanFordResult bellmanFord(List<Vertex> vertices, List<Edge> edges, Vertex source) {
+    private static BellmanFordResult bellmanFord(List<Vertex> vertices, List<WeightedEdge> edges, Vertex source) {
         if (vertices == null || vertices.isEmpty()) {
             throw new IllegalArgumentException("Vertex list cannot be null or empty.");
         }
         if (edges == null || edges.isEmpty()) {
-            throw new IllegalArgumentException("Edge list cannot be null or empty.");
+            throw new IllegalArgumentException("WeightedEdge list cannot be null or empty.");
         }
         if (!vertices.contains(source)) {
             throw new IllegalArgumentException("Source vertex is not in the vertex list.");
@@ -57,7 +57,7 @@ public class BellmanFordMain {
         for (int i = 0; i < vertexCount - 1; i++) {
             updated = false;
 
-            for (Edge edge : edges) {
+            for (WeightedEdge edge : edges) {
                 Vertex u = edge.getSource();
                 Vertex v = edge.getDestination();
                 int distU = distances.get(u);
@@ -84,7 +84,7 @@ public class BellmanFordMain {
         // meaning distances never stabilised, which is the hallmark of a negative cycle.
         boolean hasNegativeCycle = false;
         if (updated) {
-            for (Edge edge : edges) {
+            for (WeightedEdge edge : edges) {
                 Vertex u = edge.getSource();
                 Vertex v = edge.getDestination();
                 if (distances.get(u) != INFINITY && distances.get(u) + edge.getWeight() < distances.get(v)) {
@@ -166,14 +166,14 @@ public class BellmanFordMain {
 
         List<Vertex> vertices = new ArrayList<>(Arrays.asList(a, b, c, d, e, f));
 
-        List<Edge> edges = new ArrayList<>();
-        edges.add(new Edge(a, b, 5));
-        edges.add(new Edge(a, d, 2));
-        edges.add(new Edge(b, c, 5));
-        edges.add(new Edge(c, f, 10));
-        edges.add(new Edge(d, e, 5));
-        edges.add(new Edge(e, f, 7));
-        edges.add(new Edge(e, b, -10));
+        List<WeightedEdge> edges = new ArrayList<>();
+        edges.add(new WeightedEdge(a, b, 5));
+        edges.add(new WeightedEdge(a, d, 2));
+        edges.add(new WeightedEdge(b, c, 5));
+        edges.add(new WeightedEdge(c, f, 10));
+        edges.add(new WeightedEdge(d, e, 5));
+        edges.add(new WeightedEdge(e, f, 7));
+        edges.add(new WeightedEdge(e, b, -10));
 
         BellmanFordResult result = bellmanFord(vertices, edges, a);
 
@@ -214,14 +214,14 @@ public class BellmanFordMain {
 
         List<Vertex> vertices = new ArrayList<>(Arrays.asList(a, b, c, d, e, f));
 
-        List<Edge> edges = new ArrayList<>();
-        edges.add(new Edge(a, b, 5));
-        edges.add(new Edge(a, d, 2));
-        edges.add(new Edge(b, c, 3));
-        edges.add(new Edge(c, f, 4));
-        edges.add(new Edge(d, e, 5));
-        edges.add(new Edge(f, e, 2));
-        edges.add(new Edge(e, b, -15));  // Creates negative cycle: B → C → F → E → B
+        List<WeightedEdge> edges = new ArrayList<>();
+        edges.add(new WeightedEdge(a, b, 5));
+        edges.add(new WeightedEdge(a, d, 2));
+        edges.add(new WeightedEdge(b, c, 3));
+        edges.add(new WeightedEdge(c, f, 4));
+        edges.add(new WeightedEdge(d, e, 5));
+        edges.add(new WeightedEdge(f, e, 2));
+        edges.add(new WeightedEdge(e, b, -15));  // Creates negative cycle: B → C → F → E → B
 
         BellmanFordResult result = bellmanFord(vertices, edges, a);
 

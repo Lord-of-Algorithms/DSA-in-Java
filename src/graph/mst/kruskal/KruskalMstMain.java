@@ -1,6 +1,6 @@
 package graph.mst.kruskal;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 import graph.VertexImpl;
 
@@ -32,16 +32,16 @@ public class KruskalMstMain {
         vertices.add(c);
         vertices.add(d);
 
-        List<Edge> edges = new ArrayList<>();
+        List<WeightedEdge> edges = new ArrayList<>();
         // Set edges between vertices with specified weights
-        edges.add(new Edge(a, b, 1));
-        edges.add(new Edge(d, b, 2));
-        edges.add(new Edge(b, c, 3));
-        edges.add(new Edge(a, d, 4));
-        edges.add(new Edge(d, c, 5));
+        edges.add(new WeightedEdge(a, b, 1));
+        edges.add(new WeightedEdge(d, b, 2));
+        edges.add(new WeightedEdge(b, c, 3));
+        edges.add(new WeightedEdge(a, d, 4));
+        edges.add(new WeightedEdge(d, c, 5));
 
         // Calculate the MST using Kruskal's algorithm
-        List<Edge> mst = buildMst(vertices, edges);
+        List<WeightedEdge> mst = buildMst(vertices, edges);
         System.out.println("MST: " + mst);
     }
 
@@ -49,26 +49,26 @@ public class KruskalMstMain {
      * Constructs the minimum spanning tree (MST) for a graph represented by vertices and edges.
      * Assumes that the graph is connected.
      */
-    private static List<Edge> buildMst(List<Vertex> vertices, List<Edge> edges) {
+    private static List<WeightedEdge> buildMst(List<Vertex> vertices, List<WeightedEdge> edges) {
         if (vertices == null || vertices.isEmpty()) {
             throw new IllegalArgumentException("Vertex list cannot be null or empty.");
         }
         if (edges == null || edges.isEmpty()) {
-            throw new IllegalArgumentException("Edge list cannot be null or empty.");
+            throw new IllegalArgumentException("WeightedEdge list cannot be null or empty.");
         }
 
-        List<Edge> mst = new ArrayList<>();
+        List<WeightedEdge> mst = new ArrayList<>();
 
         // Sorting edges by weight
-        edges.sort(new Comparator<Edge>() {
+        edges.sort(new Comparator<WeightedEdge>() {
             @Override
-            public int compare(Edge edge1, Edge edge2) {
+            public int compare(WeightedEdge edge1, WeightedEdge edge2) {
                 return edge1.getWeight() - edge2.getWeight();
             }
         });
         UnionFind uf = new UnionFind(vertices);
 
-        for (Edge edge : edges) {
+        for (WeightedEdge edge : edges) {
             if (uf.find(edge.getSource()) != uf.find(edge.getDestination())) {
                 mst.add(edge);
                 uf.union(edge.getSource(), edge.getDestination());

@@ -1,6 +1,6 @@
 package graph.mst.prim.graph;
 
-import graph.Edge;
+import graph.WeightedEdge;
 import graph.Vertex;
 import graph.VertexUtil;
 
@@ -76,17 +76,17 @@ public class PrimMatrixGraph implements PrimGraph {
     }
 
     @Override
-    public List<Edge> getEdgesForSource(Vertex source) {
+    public List<WeightedEdge> getEdgesForSource(Vertex source) {
         Integer index = indicesMap.get(source);
         if (index == null) {
             throw new IllegalArgumentException("Vertex does not exist in the graph");
         }
-        List<Edge> edges = new ArrayList<>();
+        List<WeightedEdge> edges = new ArrayList<>();
 
         for (int i = 0; i < adjacencyMatrix[index].length; i++) {
             if (adjacencyMatrix[index][i] != NO_EDGE) { // Check if there's an edge
                 Vertex neighbor = VertexUtil.getVertexByIndex(indicesMap, i);
-                edges.add(new Edge(source, neighbor, adjacencyMatrix[index][i]));
+                edges.add(new WeightedEdge(source, neighbor, adjacencyMatrix[index][i]));
             }
         }
         return edges;
