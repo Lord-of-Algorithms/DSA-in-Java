@@ -48,6 +48,10 @@ public class KruskalMstMain {
     /**
      * Constructs the minimum spanning tree (MST) for a graph represented by vertices and edges.
      * Assumes that the graph is connected.
+     *
+     * <p>Edge direction is ignored — only the two connected vertices and the weight matter.
+     * The Union-Find structure treats each edge as undirected: union(u, v) and union(v, u)
+     * produce the same result.
      */
     private static List<WeightedEdge> buildMst(List<Vertex> vertices, List<WeightedEdge> edges) {
         if (vertices == null || vertices.isEmpty()) {
