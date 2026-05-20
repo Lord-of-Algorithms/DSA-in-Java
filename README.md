@@ -43,3 +43,7 @@ Replace the path and class name with any other `*Main` class — they all follow
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Rate the App
+
+If VisiGrab has helped your learning, a quick rating on the [App Store](https://apps.apple.com/us/app/visigrab-learn-algorithms/id1484525469) or [Google Play](https://play.google.com/store/apps/details?id=com.iov.lordofalgorithms) helps other learners discover it. Thanks!
