@@ -118,14 +118,14 @@ public class DoubleEndedLinkedList {
         }
 
         Node pred = head;
-        Node temp = head.next;
-        while (temp != null && temp.data != value) {
+        Node cur = head.next;
+        while (cur != null && cur.data != value) {
             pred = pred.next;
-            temp = temp.next;
+            cur = cur.next;
         }
 
-        if (temp != null) {
-            pred.next = temp.next;
+        if (cur != null) {
+            pred.next = cur.next;
             if (pred.next == null) {
                 tail = pred;
             }

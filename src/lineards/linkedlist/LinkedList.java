@@ -88,15 +88,15 @@ public class LinkedList {
             return;
         }
         Node pred = head;
-        Node temp = head.next;
-        while (temp != null && temp.data != value) {
+        Node cur = head.next;
+        while (cur != null && cur.data != value) {
             pred = pred.next;
-            temp = temp.next;
+            cur = cur.next;
         }
-        if (temp != null) {
+        if (cur != null) {
             // The node to be deleted is found.
             // Delete it by changing references.
-            pred.next = temp.next;
+            pred.next = cur.next;
         } else {
             throw new NoSuchElementException("Value " + value + " not found in the list.");
         }
@@ -115,10 +115,10 @@ public class LinkedList {
             return;
         }
         Node pred = head;
-        Node temp = head.next;
-        while (temp.next != null) {
+        Node cur = head.next;
+        while (cur.next != null) {
             pred = pred.next;
-            temp = temp.next;
+            cur = cur.next;
         }
         pred.next = null;
     }
