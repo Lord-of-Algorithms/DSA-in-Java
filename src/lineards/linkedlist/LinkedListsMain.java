@@ -6,7 +6,9 @@ package lineards.linkedlist;
 public class LinkedListsMain {
     public static void main(String[] args) {
         demoLinkedList();
-        demoDoubleLinkedList();
+        demoDoubleEndedLinkedList();
+        demoDoublyLinkedList();
+        demoDoubleEndedDoublyLinkedList();
     }
 
     private static void demoLinkedList() {
@@ -39,8 +41,8 @@ public class LinkedListsMain {
         printList(linkedList.head);
     }
 
-    private static void demoDoubleLinkedList() {
-        System.out.println("\nDemo DoubleLinkedList:");
+    private static void demoDoubleEndedLinkedList() {
+        System.out.println("\nDemo DoubleEndedLinkedList:");
         DoubleEndedLinkedList doubleEndedLinkedList = new DoubleEndedLinkedList();
         doubleEndedLinkedList.insertFirst('1');
         doubleEndedLinkedList.insertFirst('2');
@@ -69,9 +71,79 @@ public class LinkedListsMain {
         printList(doubleEndedLinkedList.head);
     }
 
+    private static void demoDoublyLinkedList() {
+        System.out.println("\nDemo DoublyLinkedList:");
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
+        doublyLinkedList.insertFirst('C');
+        doublyLinkedList.insertFirst('B');
+        doublyLinkedList.insertFirst('A');
+        System.out.println("Inserting C, B, A at the start...");
+        printList(doublyLinkedList.head);
+
+        doublyLinkedList.insertLast('D');
+        System.out.println("Inserting D at the end...");
+        printList(doublyLinkedList.head);
+
+        doublyLinkedList.insertAfter('B', 'E');
+        System.out.println("Inserting E after B...");
+        printList(doublyLinkedList.head);
+
+        doublyLinkedList.deleteFirst();
+        System.out.println("Deleting the first element...");
+        printList(doublyLinkedList.head);
+
+        doublyLinkedList.deleteByValue('E');
+        System.out.println("Deleting E...");
+        printList(doublyLinkedList.head);
+
+        doublyLinkedList.deleteLast();
+        System.out.println("Deleting the last element...");
+        printList(doublyLinkedList.head);
+    }
+
+    private static void demoDoubleEndedDoublyLinkedList() {
+        System.out.println("\nDemo DoubleEndedDoublyLinkedList:");
+        DoubleEndedDoublyLinkedList list = new DoubleEndedDoublyLinkedList();
+        list.insertFirst('C');
+        list.insertFirst('B');
+        list.insertFirst('A');
+        System.out.println("Inserting C, B, A at the start...");
+        printList(list.head);
+
+        list.insertLast('D');
+        System.out.println("Inserting D at the end...");
+        printList(list.head);
+
+        list.insertAfter('B', 'E');
+        System.out.println("Inserting E after B...");
+        printList(list.head);
+
+        list.deleteFirst();
+        System.out.println("Deleting the first element...");
+        printList(list.head);
+
+        list.deleteByValue('E');
+        System.out.println("Deleting E...");
+        printList(list.head);
+
+        list.deleteLast();
+        System.out.println("Deleting the last element...");
+        printList(list.head);
+    }
+
     // Helper method to print the contents of the linked list
     private static void printList(Node head) {
         Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    // Helper method to print the contents of the doubly linked list
+    private static void printList(DoublyNode head) {
+        DoublyNode current = head;
         while (current != null) {
             System.out.print(current.data + " -> ");
             current = current.next;
