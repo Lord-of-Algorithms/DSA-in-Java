@@ -1,50 +1,94 @@
 package hashtable;
 
+import hashtable.chaining.ChainingHashTable;
+import hashtable.chaining.HashFunctionType;
+import hashtable.openaddressing.OpenAddressingHashTable;
+import hashtable.openaddressing.ProbeType;
+
+/**
+ * Demonstrates both hash table implementations on the same kind of data — a
+ * small phone book that maps names (keys) to phone numbers (values):
+ *
+ *   1. Chaining          — collisions share a slot via a linked list.
+ *   2. Open addressing   — collisions are resolved by probing for another slot,
+ *                          with tombstones marking removed entries.
+ */
 public class HashTableMain {
-    /**
-     * Demonstrates the usage of the HashTable class, including key operations
-     * such as insertion, retrieval, removal, and automatic rehashing.
-     */
+
     public static void main(String[] args) {
-        // Initialize the hash table with a small capacity of 5 for demonstration purposes.
-        // This small initial capacity is chosen to illustrate how rehashing operates
-        // when the hash table becomes full. In a practical application, especially for a dataset
-        // like the chemical elements with a well-defined and relatively small set of items (118 confirmed elements),
-        // an initial capacity between 150 and 200 could be more appropriate.
-        // This provides ample space for all elements and minimizes the need for rehashing, enhancing performance.
-        HashTable hashTable = new HashTable(5, HashFunctionType.Division);
+        demoChaining();
+        System.out.println();
+        demoOpenAddressing();
+    }
 
-        // Insert key-value pairs into the hash table
-        hashTable.put("Hydrogen", 1.008);
-        hashTable.put("Helium", 4.0026);
-        hashTable.put("Lithium", 6.94);
+    private static void demoChaining() {
+        System.out.println("=== Chaining ===");
+        ChainingHashTable phoneBook = new ChainingHashTable(5, HashFunctionType.Division);
 
-        // Print the hash table's contents
-        System.out.println("Initial Hash Table:");
-        hashTable.print();
+        // Insert name -> phone number pairs.
+        phoneBook.put("Alice", "555-0101");
+        phoneBook.put("Bob", "555-0102");
+        phoneBook.put("Carol", "555-0103");
 
-        // Retrieve and print a specific value
-        Double heliumWeight = hashTable.get("Helium");
-        System.out.println("\nAtomic weight of Helium: " + heliumWeight);
+        System.out.println("Initial phone book:");
+        phoneBook.print();
 
-        // Update an existing key with a new value and print the hash table
-        hashTable.put("Helium", 4.002602);
-        System.out.println("\nAfter updating Helium's atomic weight:");
-        hashTable.print();
+        // Retrieve a value.
+        System.out.println("\nBob's number: " + phoneBook.get("Bob"));
 
-        // Remove an entry and print the hash table
-        hashTable.remove("Lithium");
-        System.out.println("\nAfter removing Lithium:");
-        hashTable.print();
+        // Update an existing key.
+        phoneBook.put("Bob", "555-9999");
+        System.out.println("\nAfter updating Bob's number:");
+        phoneBook.print();
 
-        // Insert more entries to trigger rehashing
-        hashTable.put("Beryllium", 9.0122);
-        hashTable.put("Boron", 10.81);
-        hashTable.put("Carbon", 12.011);
-        hashTable.put("Nitrogen", 14.007);
-        hashTable.put("Oxygen", 15.999);
+        // Remove an entry.
+        phoneBook.remove("Carol");
+        System.out.println("\nAfter removing Carol:");
+        phoneBook.print();
 
-        System.out.println("\nAfter adding more elements and triggering rehashing:");
-        hashTable.print();
+        // Insert more entries to trigger rehashing.
+        phoneBook.put("Dave", "555-0104");
+        phoneBook.put("Eve", "555-0105");
+        phoneBook.put("Frank", "555-0106");
+        System.out.println("\nAfter adding more names and triggering rehashing:");
+        phoneBook.print();
+    }
+
+    private static void demoOpenAddressing() {
+        System.out.println("=== Open addressing ===");
+        OpenAddressingHashTable phoneBook = new OpenAddressingHashTable(7, ProbeType.Linear);
+
+        // Insert name -> phone number pairs.
+        phoneBook.put("Bob", "555-0102");
+        phoneBook.put("Rob", "555-0103");
+        phoneBook.put("Tam", "555-0104");
+
+        System.out.println("After inserts (linear probing):");
+        phoneBook.print();
+
+        // Retrieve a value.
+        System.out.println("\nRob's number: " + phoneBook.get("Rob"));
+
+        // Remove a key — leaves a tombstone so probe chains stay intact.
+        phoneBook.remove("Rob");
+        System.out.println("\nAfter removing Rob:");
+        phoneBook.print();
+
+        // Searching for the removed key now fails; keys past the tombstone are still found.
+        System.out.println("\nRob's number after removal: " + phoneBook.get("Rob"));
+        System.out.println("Tam's number after removal: " + phoneBook.get("Tam"));
+
+        // A new insert can reuse the tombstoned slot.
+        phoneBook.put("Max", "555-0105");
+        System.out.println("\nAfter inserting Max (may reuse the tombstone):");
+        phoneBook.print();
+
+        // The same operations with quadratic probing.
+        OpenAddressingHashTable quadBook = new OpenAddressingHashTable(7, ProbeType.Quadratic);
+        quadBook.put("Bob", "555-0102");
+        quadBook.put("Rob", "555-0103");
+        quadBook.put("Vic", "555-0104");
+        System.out.println("\nAfter inserts (quadratic probing):");
+        quadBook.print();
     }
 }

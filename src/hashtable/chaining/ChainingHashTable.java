@@ -1,20 +1,20 @@
-package hashtable;
+package hashtable.chaining;
 
 /**
  * A hash table implementation using chaining with linked lists to resolve collisions.
  * This class provides methods for inserting, retrieving, and removing key-value pairs,
- * where keys are strings and values are double precision numbers.
+ * where keys are names (strings) and values are phone numbers (strings).
  */
-public class HashTable {
+public class ChainingHashTable {
 
     private HashTableBucket[] bucketArray;
     private int size; // Number of key-value pairs in the hash table
-    private HashFunctionType hashFunctionType;
+    private final HashFunctionType hashFunctionType;
     private static final double A = (Math.sqrt(5) - 1) / 2; // Constant for Multiplication Method
 
     private static final double MAX_LOAD_FACTOR = 0.75;
 
-    public HashTable(int capacity, HashFunctionType hashFunctionType) {
+    public ChainingHashTable(int capacity, HashFunctionType hashFunctionType) {
         if (capacity < 1) {
             throw new IllegalArgumentException("Initial capacity must be >= 1");
         }
@@ -47,7 +47,7 @@ public class HashTable {
      * @param key   the key to insert or update
      * @param value the value associated with the key
      */
-    public void put(String key, double value) {
+    public void put(String key, String value) {
         // Compute the index for this key using the hash function
         int index = hash(key);
         if (bucketArray[index] == null) {
@@ -123,7 +123,7 @@ public class HashTable {
      * @param key the key whose value is to be retrieved
      * @return the value associated with the key, or null if the key is not found
      */
-    public Double get(String key) {
+    public String get(String key) {
         int index = hash(key);
         HashTableBucket bucket = bucketArray[index];
         if (bucket == null) {
@@ -179,7 +179,7 @@ public class HashTable {
         HashTableEntry head; // Head of the linked list
 
         // Inserts a new entry at the beginning of the list
-        void insertAtBeginning(String key, double value) {
+        void insertAtBeginning(String key, String value) {
             HashTableEntry newEntry = new HashTableEntry(key, value);
             newEntry.next = head;
             head = newEntry;
@@ -241,10 +241,10 @@ public class HashTable {
      */
     private static class HashTableEntry {
         String key;
-        double value;
+        String value;
         HashTableEntry next; // Reference to the next entry (node) in the linked list
 
-        HashTableEntry(String key, double value) {
+        HashTableEntry(String key, String value) {
             this.key = key;
             this.value = value;
         }
