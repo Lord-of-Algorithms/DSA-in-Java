@@ -63,7 +63,7 @@ public class MergeSort {
         while (left <= mid &&
                 right <= end) {
 
-            if (array[left] <
+            if (array[left] <=
                     array[right]) {
                 auxArray[i++] = array[left++];
             } else {
